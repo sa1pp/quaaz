@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>بنك أسئلة إدارة بيانات الأعمال</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#eef2f7;--sf:#fff;--tx:#14213d;--mut:#5d6b82;--pri:#0f766e;--prt:#fff;--ok:#0b7a4b;--okb:#dcf5e7;--bad:#b42318;--badb:#fde6e3;--wr:#9a6700;--wrb:#fff1cc;--bd:#d3dbe6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1522;--sf:#172033;--tx:#e8edf6;--mut:#9aa8c0;--pri:#2dd4bf;--prt:#06201c;--ok:#4ade9c;--okb:#10392b;--bad:#ff8f84;--badb:#3d1a17;--wr:#f5c542;--wrb:#3a2f0e;--bd:#2a3650;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1522;--sf:#172033;--tx:#e8edf6;--mut:#9aa8c0;--pri:#2dd4bf;--prt:#06201c;--ok:#4ade9c;--okb:#10392b;--bad:#ff8f84;--badb:#3d1a17;--wr:#f5c542;--wrb:#3a2f0e;--bd:#2a3650;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.7 "IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif}
+main{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:22px;line-height:1.4;margin:0 0 4px}
+p{margin:0 0 10px}.mut{color:var(--mut);font-size:14px}
+.t{white-space:pre-wrap;unicode-bidi:plaintext;text-align:start}
+.box{background:var(--sf);border:1.5px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:right;background:var(--sf);border:1.5px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:9px;font:inherit;color:var(--tx);cursor:pointer}
+.ch:disabled{opacity:.5;cursor:default}.ch span{font-size:14px;color:var(--mut)}.ch.all{border-color:var(--pri);font-weight:700}
+.cnt{display:flex;justify-content:space-between;color:var(--mut);font-size:14px}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin:6px 0 16px}.bar i{display:block;height:100%;background:var(--pri)}
+.qt{font-size:18px;font-weight:700;line-height:1.8;margin:0 0 14px}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:start;background:var(--sf);border:1.5px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:9px;font:inherit;color:var(--tx);cursor:pointer}
+.opt b{flex:0 0 auto;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--bd);display:grid;place-items:center;font-size:14px}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--okb);border-color:var(--ok);color:var(--ok);font-weight:700}.opt.ok b{background:var(--ok);border-color:var(--ok);color:var(--okb)}
+.opt.bad{background:var(--badb);border-color:var(--bad);color:var(--bad);font-weight:700}.opt.bad b{background:var(--bad);border-color:var(--bad);color:var(--badb)}
+.fb{border-radius:12px;padding:12px 14px;margin:6px 0 14px;font-weight:500}.fb.ok{background:var(--okb);color:var(--ok)}.fb.bad{background:var(--badb);color:var(--bad)}.fb.wr{background:var(--wrb);color:var(--wr)}
+.fb p,.ans p{margin:6px 0 0;font-weight:400;color:var(--tx);font-size:15px}
+.ans{border:1.5px solid var(--pri);border-radius:12px;padding:12px 14px;margin:10px 0 14px}.ans>b{color:var(--pri)}
+textarea{font:inherit;color:var(--tx);background:var(--sf);border:1.5px solid var(--bd);border-radius:10px;padding:10px 12px;width:100%;min-height:110px;margin-bottom:10px;unicode-bidi:plaintext}
+textarea:focus,button:focus-visible{outline:3px solid var(--pri);outline-offset:1px}
+.btn{background:var(--pri);color:var(--prt);border:0;border-radius:10px;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer}
+.btn.alt{background:none;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.g{background:var(--ok);color:var(--okb)}.btn.y{background:var(--wr);color:var(--wrb)}.btn.r{background:var(--bad);color:var(--badb)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.c{text-align:center}.big{font-size:52px;font-weight:700;color:var(--pri);line-height:1.2}
+.rv{border-top:1px solid var(--bd);padding:12px 0}
+.x{background:none;border:0;color:var(--mut);font:inherit;cursor:pointer;padding:0}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+(function(){
+var C=[
+{n:"الفصل الأول",s:"مقدمة في قواعد البيانات",q:[
+["m","ما المشكلة الأساسية التي تظهر عندما تحتفظ أقسام المؤسسة المختلفة بنسخ مستقلة من بيانات العميل؟",["Data Redundancy and Data Inconsistency","Data Independence","Referential Integrity","Data Normalization"],0,"تكرار بيانات العميل في ملفات متعددة قد يؤدي إلى عدم اتساقها عند تحديث نسخة دون الأخرى."],
+["t","نظام إدارة قواعد البيانات (DBMS) هو نفسه قاعدة البيانات، لأن كلا المصطلحين يشيران إلى البيانات المخزنة.",false,"قاعدة البيانات هي البيانات المنظمة والمترابطة، أما DBMS فهو البرنامج الذي يديرها ويتيح تعريفها وإنشاءها وصيانتها والتحكم في الوصول إليها."],
+["o","شركة لديها 12 ملف Excel منفصلاً، وتحتاج إلى جمعها يدوياً لإعداد تقرير شهري. ما القصور في نظم الملفات الذي يظهر هنا؟ وما الميزة التي يقدمها DBMS لمعالجته؟","عزلة البيانات (Data Isolation) وصعوبة الوصول إلى البيانات. يوفر DBMS قاعدة بيانات موحدة تسهل الاستعلام والوصول إلى البيانات المشتركة."],
+["m","أي مما يلي يمثل البيانات الوصفية (Metadata)؟",["أسماء العملاء وأرقام هواتفهم","أسماء الجداول والأعمدة وأنواع البيانات والقيود","عمليات البيع اليومية","إجمالي الإيرادات الشهرية"],1,"Metadata تعني بيانات عن البيانات، وتصف بنية قاعدة البيانات ومكوناتها."],
+["t","من وظائف DBMS التحكم في الوصول، وفرض التكامل، وإدارة الوصول المتزامن، والنسخ الاحتياطي والاسترجاع.",true,"هذه من الوظائف الأساسية لنظام إدارة قواعد البيانات."],
+["o","لماذا قد يكون الاستثمار في DBMS غير مناسب لشركة صغيرة جداً لديها ملف بيانات بسيط ومستخدم واحد؟","لأن تكلفة النظام والتراخيص والإدارة والتدريب قد تتجاوز الفوائد المتوقعة، خصوصاً عندما يكون حجم البيانات وتعقيدها محدوداً."],
+["m","في معمارية ANSI/SPARC، أي مستوى يصف طريقة التخزين الفعلية وهياكل البيانات ومسارات الوصول؟",["External Level","Conceptual Level","Internal Level","User Level"],2,"المستوى الداخلي (Internal Level) يصف كيف تخزن البيانات فعلياً."],
+["m","غيّرت المؤسسة وسيط التخزين من HDD إلى SSD دون الحاجة إلى تعديل التطبيقات التي تستعلم عن البيانات. ما نوع الاستقلالية الذي يوضحه ذلك؟",["Logical Data Independence","Physical Data Independence","Referential Integrity","Data Redundancy"],1,"الاستقلالية الفيزيائية تسمح بتغيير تفاصيل التخزين دون التأثير على المستويات الأعلى والتطبيقات."],
+["t","الاستقلالية المنطقية للبيانات (Logical Data Independence) عادةً أصعب تحقيقاً من الاستقلالية الفيزيائية.",true,"تغيير البنية المفاهيمية قد يؤثر في التطبيقات والمشاهدات الخارجية المرتبطة بها."],
+["o","تريد الجامعة أن يرى موظف القبول بيانات الطالب الأكاديمية، بينما يرى موظف الإسكان بيانات السكن والجنسية فقط. أي مستوى من معمارية ANSI/SPARC يعالج هذا الاختلاف؟","المستوى الخارجي (External Level)، لأنه يوفر Views مختلفة بحسب احتياجات المستخدمين."],
+["m","ما النموذج الذي ينظم البيانات في شكل شجري، بحيث يكون لكل سجل تابع Parent واحد فقط؟",["Relational Model","Network Model","Hierarchical Model","Object-Oriented Model"],2,"النموذج الهرمي يعتمد على هيكل شجري من الآباء والأبناء."],
+["o","ما الفرق الأساسي بين Hierarchical Model وNetwork Model؟","النموذج الهرمي يسمح لكل سجل تابع بأصل واحد فقط، بينما يسمح النموذج الشبكي بأن يكون للسجل أكثر من أصل."],
+["t","النموذج العلائقي (Relational Model) يعتمد على الجداول والمفاتيح بدلاً من الاعتماد على مسارات وصول صريحة باستخدام المؤشرات الفيزيائية.",true,"العلاقات بين الجداول تُبنى باستخدام المفاتيح الأساسية والأجنبية."],
+["m","من الذي يتحمل المسؤولية الشاملة عن إدارة قاعدة البيانات وأمنها وصيانتها؟",["End User","Database Administrator (DBA)","Data Entry Clerk","Business Customer"],1,"DBA هو مدير قاعدة البيانات والمسؤول عن إدارتها وتشغيلها وصيانتها."],
+["o","صنّف الأوامر التالية إلى لغات SQL الفرعية:\nCREATE — SELECT — GRANT — COMMIT","CREATE: DDL\nSELECT: DML\nGRANT: DCL\nCOMMIT: TCL","DDL لتعريف البنية، DML لمعالجة البيانات، DCL للصلاحيات، وTCL للمعاملات."],
+["t","الأمر ROLLBACK يستخدم لتأكيد المعاملة وحفظ التغييرات بصورة نهائية.",false,"COMMIT يؤكد التغييرات، أما ROLLBACK فيلغي التغييرات غير المؤكدة ضمن حدود المعاملة."],
+["o","موظف سابق احتفظ بنسخة من بيانات العملاء بعد مغادرة المؤسسة. ما المشكلة التي يكشفها ذلك؟ وما وظيفة DBMS المناسبة لمعالجتها؟","ضعف الأمن والتحكم في الوصول. يعالج DBMS ذلك من خلال إدارة المستخدمين والصلاحيات والتحكم في الوصول إلى البيانات."],
+["m","أي مما يلي يمثل أحد مكونات بيئة قاعدة البيانات الخمسة؟",["Hardware","Revenue","Market Share","Customer Satisfaction"],0,"المكونات الخمسة هي Hardware وSoftware وData وProcedures وPeople."],
+["o","لماذا لا يكفي شراء DBMS وحده لضمان نجاح مشروع قاعدة البيانات؟","لأن بيئة قاعدة البيانات تشمل الأجهزة والبرمجيات والبيانات والإجراءات والأفراد. كما تحتاج المؤسسة إلى تصميم صحيح، وتدريب، وإدارة، وضوابط أمن وتكامل."],
+["o","شركة لديها بيانات عملاء متكررة وغير متسقة، وتقارير تستغرق أياماً لإعدادها، كما تواجه مشكلات في مشاركة البيانات بين الأقسام. اذكر ميزتين أساسيتين يمكن أن تستفيد منهما عند الانتقال إلى نهج قواعد البيانات.","1. تقليل تكرار البيانات وتحسين اتساقها.\n2. مشاركة البيانات والوصول الموحد إليها، مما يحسن التقارير ودعم القرار."]
+]},
+{n:"الفصل الثاني",s:"النموذج العلائقي والجبر العلائقي",q:[
+["m","في النموذج العلائقي، ماذا يمثل Tuple؟",["عموداً في الجدول","صفاً في الجدول","مفتاحاً أجنبياً","نوع البيانات"],1,"Tuple هو صف أو سجل في العلاقة."],
+["m","ماذا تمثل Attribute في النموذج العلائقي؟",["صفاً","علاقة بين جدولين","عموداً أو خاصية","قاعدة عمل"],2,"Attribute تمثل خاصية أو عموداً في الجدول."],
+["t","المجال (Domain) يحدد مجموعة القيم المسموح بها للخاصية.",true,"مثال ذلك أن يكون مجال Salary أرقاماً موجبة ضمن الحدود التي تحددها قاعدة العمل."],
+["o","جدول EMPLOYEE يحتوي على Employee_ID وName وSalary. ما عدد الصفوف إذا احتوى الجدول على خمسة موظفين؟ وما عدد الأعمدة المذكورة؟","خمسة صفوف وثلاثة أعمدة.","كل موظف يمثل Tuple، وكل خاصية تمثل Attribute."],
+["m","ما الهدف الأساسي من Primary Key؟",["تخزين القيم المكررة","تمييز كل صف بصورة فريدة","ربط الجدول بأي جدول دون قيود","ترتيب الصفوف أبجدياً"],1,"المفتاح الأساسي يميز كل سجل بصورة فريدة، ولا يسمح بقيم NULL أو تكرار قيمه."],
+["o","لماذا قد يكون البريد الإلكتروني غير مناسب كمفتاح أساسي في نظام معين، رغم أنه فريد حالياً؟","لأنه قد يتغير بمرور الزمن، وقد يكون اختيارياً، ولذلك لا يمثل دائماً معرفاً ثابتاً وموثوقاً لكل سجل."],
+["m","أي مفتاح يستخدم للإشارة إلى المفتاح الأساسي في جدول آخر؟",["Candidate Key","Foreign Key","Composite Attribute","Derived Attribute"],1,"Foreign Key يربط جدولاً بجدول آخر ويحافظ على التكامل المرجعي."],
+["t","وجود Foreign Key يعني أن قيمة المفتاح الأجنبي يجب أن تكون دائماً غير فارغة.",false,"يمكن أن يسمح تصميم الجدول بقيمة NULL في المفتاح الأجنبي إذا كانت المشاركة اختيارية، ما لم يفرض التصميم NOT NULL."],
+["o","جدول RENTAL يحتوي على CUST_ID يشير إلى CUSTOMER.CUST_ID. إذا كانت قيمة CUST_ID في عملية التأجير تساوي 99، ولا يوجد عميل بهذا الرقم، فما نوع الانتهاك؟","انتهاك التكامل المرجعي (Referential Integrity Violation).","لا يجوز أن يشير المفتاح الأجنبي إلى سجل غير موجود في الجدول المرجعي."],
+["m","أي عملية في الجبر العلائقي (Relational Algebra) تختار أعمدة محددة؟",["SELECT","PROJECT","JOIN","UNION"],1,"PROJECT أو π تختار الأعمدة، بينما SELECT أو σ تختار الصفوف."],
+["m","أي عملية في الجبر العلائقي تستخدم لتصفية الصفوف وفق شرط؟",["Projection","Selection","Union","Rename"],1,"Selection أو σ تعيد الصفوف التي تحقق شرطاً محدداً."],
+["o","لدينا العلاقة EMPLOYEE. اكتب تعبير الجبر العلائقي الذي يعرض أسماء الموظفين الذين رواتبهم أكبر من 8000.","π_name (σ_salary > 8000 (EMPLOYEE))","نختار الصفوف التي تحقق شرط الراتب أولاً، ثم نعرض عمود الاسم."],
+["m","ما العملية التي تربط بيانات جدولين اعتماداً على شرط مشترك؟",["JOIN","DIFFERENCE","INTERSECTION","PROJECT"],0,"JOIN تجمع المعلومات المرتبطة من أكثر من علاقة."],
+["o","لديك CUSTOMER(Cust_ID, Name) وRENTAL(Rental_ID, Cust_ID). تريد عرض أسماء العملاء الذين لديهم عمليات تأجير. ما العملية المناسبة؟","JOIN بين CUSTOMER وRENTAL باستخدام Cust_ID المشترك، ثم PROJECT على Name."],
+["t","عملية UNION تتطلب توافق العلاقات في عدد الأعمدة وأن تكون المجالات أو أنواع البيانات المقابلة متوافقة.",true,"يجب أن تكون العلاقتان Union-Compatible حتى تكون عملية الاتحاد صحيحة."],
+["m","ما ناتج عملية DIFFERENCE بين مجموعتين A وB؟",["العناصر الموجودة في A فقط وغير الموجودة في B","جميع العناصر في المجموعتين مع التكرار","العناصر المشتركة فقط","حاصل ضرب عدد صفوف المجموعتين"],0,"A − B تعيد العناصر التي تنتمي إلى A ولا تنتمي إلى B."],
+["o","في قاعدة بيانات السيارات، تريد الإدارة معرفة السيارات التي لم تُؤجر مطلقاً. ما العملية المناسبة بين CAR وRENTAL؟","π_plate(CAR) − π_plate(RENTAL)","نطرح لوحات السيارات التي ظهرت في التأجير من جميع لوحات السيارات."],
+["t","إذا كانت نتيجة Selection خالية، فهذا يعني دائماً أن الجدول الأصلي لا يحتوي على أي بيانات.",false,"قد يحتوي الجدول على بيانات، لكن لا يوجد صف يحقق شرط التصفية المحدد."],
+["o","كتب محلل شرطاً يطلب أن تكون فئة السيارة Sedan وSUV في الصف نفسه. لماذا قد تكون النتيجة فارغة؟","لأن قيمة Category الواحدة في السجل لا يمكن أن تكون Sedan وSUV معاً إذا كانت الفئة أحادية القيمة. إذا كان المطلوب العملاء الذين استأجروا النوعين عبر عمليات مختلفة، فيجب حساب مجموعتي العملاء ثم استخدام INTERSECTION."],
+["o","لديك استعلام يربط CUSTOMER وRENTAL وCAR، ثم يصفّي المدينة والفئة بعد الربط. ما الفائدة المحتملة من تصفية CUSTOMER وCAR قبل إجراء JOIN؟","تقليل عدد الصفوف الداخلة إلى عملية الربط، مما قد يقلل حجم المعالجة ويحسن الكفاءة. ويجب الحفاظ على التكافؤ المنطقي للتعبير."]
+]},
+{n:"الفصل الثالث",s:"نمذجة البيانات ومخطط ERD",q:[
+['m','ما المقصود بالكيان (Entity)؟',['شيء أو مفهوم من عالم الأعمال نريد تخزين بيانات عنه','عملية حسابية','شرط SQL','نوع من أنواع الفهارس'],0,'الكيان يمثل شيئاً أو مفهوماً مهماً للمؤسسة، مثل CUSTOMER أو EMPLOYEE.'],
+['o','في نظام مستشفى، توجد معلومات عن المرضى والأطباء والمواعيد. حدد ثلاثة كيانات محتملة.','PATIENT وDOCTOR وAPPOINTMENT.','تمثل هذه العناصر مفاهيم مستقلة تحتاج المؤسسة إلى تخزين بيانات عنها.'],
+['m','ما الخاصية التي يمكن تقسيمها إلى أجزاء فرعية مفيدة؟',['Simple Attribute','Composite Attribute','Derived Attribute','Multi-valued Attribute'],1,'مثال ذلك Address التي يمكن تقسيمها إلى City وDistrict وStreet.'],
+['t','إذا كان لكل عميل عدة أرقام جوال، فإن Mobile يعتبر بالضرورة خاصية أحادية القيمة.',false,'تعدد أرقام الجوال يعني أن الخاصية متعددة القيم (Multi-valued Attribute).'],
+['o','لدى النظام تاريخ ميلاد الموظف، ويحتاج إلى عرض عمره الحالي. أي الخاصيتين أنسب للتخزين غالباً: Date_of_Birth أم Age؟ ولماذا؟','تخزين Date_of_Birth وحساب Age عند الحاجة؛ لأن العمر يتغير بمرور الزمن، بينما تاريخ الميلاد ثابت.'],
+['m','ما المقصود بالعلاقة (Relationship) في ERD؟',['وصف رابط أو ارتباط بين كيانين أو أكثر','عمود داخل جدول','نوع بيانات رقمي','مفتاح أساسي دائماً'],0,'العلاقة تصف قاعدة عمل تربط الكيانات، مثل CUSTOMER rents CAR.'],
+['m','شركة تسمح للعميل باستئجار عدة سيارات عبر الزمن، ويمكن للسيارة أن تؤجر لعملاء مختلفين عبر الزمن. ما نوع العلاقة العامة؟',['1:1','1:N','M:N','Unary فقط'],2,'كل طرف يمكن أن يرتبط بعدة سجلات من الطرف الآخر.'],
+['o','في شركة، كل فرع يضم عدة موظفين، وكل موظف يتبع فرعاً أساسياً واحداً. حدد نوع العلاقة من BRANCH إلى EMPLOYEE.','One-to-Many (1:N).','الفرع الواحد يرتبط بعدة موظفين، والموظف يتبع فرعاً واحداً.'],
+['t','المشاركة الإلزامية (Mandatory Participation) تعني أن كل سجل من الكيان يجب أن يشارك في العلاقة مرة واحدة على الأقل.',true,'الحد الأدنى للمشاركة يكون 1 بدلاً من 0.'],
+['m','إذا كان الموظف قد لا يدير أي فرع، لكنه إذا أدار فرعاً فإنه يدير فرعاً واحداً فقط، فما نوع مشاركته في علاقة الإدارة؟',['Mandatory','Optional','Total','Weak'],1,'عدم اشتراط ارتباط كل موظف بعلاقة الإدارة يعني مشاركة اختيارية.'],
+['o','كل فرع يجب أن يكون له مدير واحد إلزامي، ولا يجوز للمدير إدارة أكثر من فرع. ما نوع العلاقة بين EMPLOYEE وBRANCH من حيث الحد الأعلى؟','One-to-One (1:1)، مع مشاركة إلزامية للفرع واختيارية للموظف إذا كان بعض الموظفين لا يديرون فروعاً.'],
+['t','Cardinality وParticipation مصطلحان لهما المعنى نفسه في ERD.',false,'Cardinality تحدد الحد الأعلى للارتباط، أما Participation فتحدد هل الارتباط اختياري أم إلزامي.'],
+['o','موظف يشرف على موظفين آخرين، والموظف الواحد قد يكون له مشرف واحد فقط. ما نوع العلاقة؟ وما اسمها؟','Recursive Relationship من نوع One-to-Many، حيث يرتبط EMPLOYEE بنفسه بدور Supervisor ودور Subordinate.'],
+['m','ما المقصود بدرجة العلاقة (Relationship Degree)؟',['عدد الصفوف في الجدول','عدد الكيانات المشاركة في علاقة واحدة','عدد المفاتيح الأجنبية','عدد الخصائص المشتقة'],1,'العلاقة الثنائية Binary تربط كيانين، والثلاثية Ternary تربط ثلاثة كيانات.'],
+['o','طبيب يصف دواءً لمريض. إذا كانت عملية الوصف تعتمد على الطبيب والدواء والمريض معاً، فما درجة العلاقة؟','Ternary Relationship؛ لأنها تربط ثلاثة كيانات في علاقة واحدة.'],
+['t','وجود علاقة بين كيانين يعني بالضرورة أن العلاقة بينهما ثنائية فقط، ولا يمكن أن تكون هناك علاقات متعددة مختلفة بين الكيانين نفسيهما.',false,'يمكن أن توجد علاقات متعددة بين الكيانين نفسيهما، مثل الطالب يدرس مادة والطالب يقيم مادة، ولكل علاقة معنى وقواعد مختلفة.'],
+['o','مؤسسة تسجل أكثر من رقم هاتف لكل عميل. ما نوع الخاصية؟ وما القرار التصميمي المحتمل في ERD؟','Multi-valued Attribute، ويمكن تمثيلها كخاصية متعددة القيم أو ككيان مرتبط وفق متطلبات النظام، وغالباً تنشأ لها علاقة وجدول مستقل عند التحويل العلائقي.'],
+['o','لماذا يجب أن تستند قيود ERD إلى قواعد العمل وليس إلى افتراضات المصمم الشخصية؟','لأن المخطط يجب أن يعكس الواقع التشغيلي وسياسات المؤسسة. ويمكن الاستناد إلى المقابلات والسياسات والنماذج والتقارير والاستثناءات لتحديد القيود.'],
+['o','شركة تأجير سيارات تسمح لكل سيارة بفرع أساسي واحد فقط، وقد يحتوي الفرع على عدة سيارات. حدد الكيانين والعلاقة ونوعها.','الكيانان: CAR وBRANCH.\nالعلاقة: belongs_to.\nالنوع: N:1 من CAR إلى BRANCH، أو 1:N من BRANCH إلى CAR.'],
+['o','تريد المؤسسة تسجيل السائقين الإضافيين في عمليات التأجير. متى تكون DRIVER كياناً مستقلاً، ومتى يمكن تمثيل السائقين كخاصية متعددة القيم؟','تكون DRIVER كياناً مستقلاً إذا كانت بيانات السائقين تدار بصورة مستقلة أو يعاد استخدام السائق في عمليات تأجير متعددة. أما إذا كانت البيانات مجرد تفاصيل مرتبطة بعملية تأجير ولا تحتاج إلى إدارة مستقلة، فقد تكون خاصية متعددة القيم مركبة مناسبة.']
+]},
+{n:"الفصل الرابع",s:"التحويل إلى النموذج العلائقي والتطبيع",q:[
+['m','عند تحويل Strong Entity إلى نموذج علائقي، ما الإجراء الأساسي؟',['إنشاء جدول مستقل يحمل خصائص الكيان ومفتاحه','حذف جميع خصائص الكيان','تحويله دائماً إلى جدول وسيط','دمجه دائماً مع كيان ضعيف'],0,'الكيان القوي يتحول إلى جدول مستقل، ويصبح مفتاحه PK.'],
+['o','كيان STUDENT يحتوي على Student_ID وName وDate_of_Birth. اكتب المخطط العلائقي المقترح.','STUDENT(Student_ID PK, Name, Date_of_Birth)','كل خاصية تتحول إلى عمود، والمفتاح الأساسي يميز الطالب.'],
+['m','عند تحويل Composite Attribute مثل Address إلى أعمدة في جدول، ماذا يحدث عادةً؟',['إنشاء جدول مستقل للعنوان في كل الحالات','تقسيمها إلى خصائص فرعية داخل جدول الكيان','حذفها من التصميم','تحويلها إلى Foreign Key'],1,'يمكن تحويل Address إلى City وDistrict وStreet حسب احتياجات النظام.'],
+['o','لدى DOCTOR عدة أرقام هواتف. اقترح مخططاً علائقياً مناسباً.','DOCTOR(Doctor_ID PK, Doctor_Name)\nDOCTOR_PHONE(Doctor_ID PK/FK, Phone_Number PK)','ينشأ جدول مستقل للخاصية متعددة القيم، ويكون المفتاح المركب من معرف الطبيب ورقم الهاتف.'],
+['t','إذا كانت Age مشتقة من Date_of_Birth، فمن الأفضل دائماً تخزين Age وحده دون تاريخ الميلاد.',false,'العمر يتغير، لذلك يفضل تخزين تاريخ الميلاد وحساب العمر عند الحاجة.'],
+['o','كيان DEPENDENT يعتمد في تعريفه على EMPLOYEE، ولا يكون Dependent_Name وحده فريداً بين جميع الموظفين. ما نوع الكيان؟ وما المفتاح المحتمل؟','Weak Entity، ويكون المفتاح المركب Employee_ID + Dependent_Name.','Employee_ID هو مفتاح المالك، وDependent_Name هو Partial Key.'],
+['m','ما المقصود بـ Partial Key في الكيان الضعيف؟',['مفتاح أجنبي فقط','خاصية تميز سجلات الكيان الضعيف داخل نطاق المالك، لكنها لا تكفي وحدها عالمياً','مفتاح أساسي مستقل دائماً','خاصية مشتقة'],1,'المفتاح الجزئي يحتاج إلى مفتاح الكيان المالك ليكوّنا معاً المفتاح الأساسي المركب.'],
+['o','لدينا STUDENT وCOURSE، والعلاقة بينهما M:N، وتوجد خاصية Grade. كيف يتم التحويل؟','STUDENT(Student_ID PK, …)\nCOURSE(Course_ID PK, …)\nENROLLMENT(Student_ID PK/FK, Course_ID PK/FK, Grade)','ينشأ جدول وسيط يحمل مفاتيح الطرفين وخصائص العلاقة.'],
+['m','عند وجود علاقة M:N، ما الحل المعتاد عند التحويل إلى النموذج العلائقي؟',['نقل مفتاح أحد الجدولين فقط إلى الآخر','إنشاء Junction Table','حذف العلاقة','تخزين كل القيم في عمود نصي واحد'],1,'الجدول الوسيط يمثل العلاقة ويحتوي على المفاتيح الأجنبية للطرفين.'],
+['o','في نظام تأجير سيارات، ما الجدول الأنسب لتخزين Pickup_Date وReturn_Date وDaily_Rate؟','RENTAL.','هذه خصائص تصف عملية التأجير وليس العميل أو السيارة وحدهما.'],
+['t','إذا كان الموظف يجب أن ينتمي إلى قسم واحد، والقسم يضم عدة موظفين، فيمكن نقل Department_ID كـFK إلى جدول EMPLOYEE.',true,'لأن EMPLOYEE يقع في جهة N، والمشاركة الإلزامية تسمح بوضع FK غير فارغ وفق قاعدة العمل.'],
+['o','في علاقة 1:1، إذا كانت مشاركة أحد الطرفين اختيارية والآخر إلزامية، فما القاعدة الواردة في شرائح المقرر لوضع المفتاح الأجنبي؟','يوضع المفتاح الأجنبي في جدول الطرف الاختياري، ويشير إلى المفتاح الأساسي للطرف الإلزامي.','هذه هي قاعدة Optional receives FK from Mandatory وفق عرض المقرر.'],
+['m','في علاقة Recursive من نوع 1:N بين الموظفين، كيف يمكن تمثيل المشرف؟',['إنشاء جدول مستقل لكل موظف','إضافة Supervisor_ID كـFK ذاتي في EMPLOYEE','حذف Employee_ID','إضافة عمود مشترك في جميع الجداول'],1,'Supervisor_ID يشير إلى Employee_ID في الجدول نفسه.'],
+['o','سيارة يمكن أن تخضع لعدة عمليات صيانة، ويبدأ ترقيم الصيانة من 1 لكل سيارة. ما المفتاح الأساسي المناسب إذا كانت MAINTENANCE كياناً ضعيفاً؟','MAINTENANCE(Plate_No PK/FK, Maint_No PK, Maintenance_Date, Cost, Workshop)','المفتاح المركب Plate_No + Maint_No يميز الصيانة داخل السيارة.'],
+['m','ما الهدف الأساسي من Normalization؟',['زيادة التكرار','تقليل التكرار وشذوذ الإدراج والتحديث والحذف','حذف المفاتيح الأساسية','دمج جميع الجداول في جدول واحد'],1,'التطبيع ينظم الجداول لتقليل المشكلات الناتجة عن التكرار والاعتماديات غير المناسبة.'],
+['o','ما المقصود بـ Update Anomaly؟','حدوث عدم اتساق عند تحديث معلومة مكررة في أكثر من صف أو موضع، مع عدم تحديث جميع النسخ.'],
+['m','ما الشرط الأساسي للصيغة الطبيعية الأولى (1NF)؟',['أن تكون كل خلية تحتوي على قيمة ذرية واحدة','إزالة جميع المفاتيح الأجنبية','عدم وجود أي علاقة بين الجداول','أن تكون كل الأعمدة مشتقة'],0,'1NF تتطلب Atomic Values وعدم وجود مجموعات متكررة في الخلية.'],
+['o','جدول CUSTOMER يحتوي على عمود Phones يخزن عدة أرقام في الخلية نفسها. ما المشكلة؟ وما التصحيح المناسب؟','انتهاك 1NF لأن الخلية تحتوي على أكثر من قيمة. يمكن إنشاء CUSTOMER_PHONE بحيث يمثل كل رقم في صف مستقل، مع ربطه بالعميل.'],
+['m','أي عبارة تصف 2NF بدقة؟',['تحقق 1NF وإزالة الاعتماد الجزئي على جزء من المفتاح المركب','إزالة كل المفاتيح الأجنبية','منع استخدام المفاتيح المركبة','تحقق 3NF فقط دون 1NF'],0,'يجب أن تعتمد الخصائص غير المفتاحية اعتماداً كاملاً على المفتاح المركب كله، لا على جزء منه.'],
+['o','لدينا جدول ORDER_DETAIL(Order_ID, Product_ID, Product_Name, Quantity)، والمفتاح الأساسي مركب من Order_ID وProduct_ID. إذا كان Product_Name يعتمد على Product_ID فقط، فما المشكلة؟ وما التصحيح؟','Partial Dependency، وهذا يخالف 2NF. يمكن نقل Product_Name إلى جدول PRODUCT(Product_ID PK, Product_Name)، مع بقاء Product_ID في ORDER_DETAIL كـFK.']
+]},
+{n:"الفصل الخامس",s:"SQL — SELECT وWHERE",q:[
+['m','أي عبارة SQL تحدد الأعمدة المطلوب عرضها؟',['FROM','WHERE','SELECT','ORDER BY'],2,'SELECT تحدد الأعمدة أو التعبيرات المطلوب إظهارها في النتيجة.'],
+['o','لديك جدول HR.EMPLOYEES. اكتب استعلاماً يعرض FIRST_NAME وLAST_NAME وSALARY فقط.','SELECT FIRST_NAME, LAST_NAME, SALARY\nFROM HR.EMPLOYEES;','حددنا الأعمدة المطلوبة في SELECT والجدول في FROM.'],
+['m','ما وظيفة Column Alias؟',['تغيير اسم العمود الأصلي داخل قاعدة البيانات','تغيير عنوان العمود في نتيجة الاستعلام فقط','حذف العمود من الجدول','إنشاء جدول جديد'],1,'الاسم المستعار يغير عنوان النتيجة فقط ولا يغير بنية الجدول.'],
+['o','اكتب استعلاماً يعرض LAST_NAME والراتب السنوي المحسوب من SALARY × 12، مع تسمية العمود ANNUAL_SALARY.','SELECT LAST_NAME,\n       SALARY * 12 AS ANNUAL_SALARY\nFROM HR.EMPLOYEES;','التعبير الحسابي يحسب وقت تنفيذ الاستعلام ولا ينشئ عموداً فعلياً جديداً.'],
+['t','في Oracle، يمكن استخدام الاسم المستعار الناتج في SELECT داخل WHERE في مستوى الاستعلام نفسه بصورة اعتيادية.',false,'WHERE تعالج قبل SELECT في الترتيب المنطقي الوارد في المقرر، لذلك لا يكون alias الناتج متاحاً في WHERE في المستوى نفسه.'],
+['o','إذا كان SALARY يساوي 2,000، فما ناتج التعبير:\nSALARY + 500 * 2\nوما ناتج التعبير:\n(SALARY + 500) * 2','التعبير الأول: 3,000.\nالتعبير الثاني: 5,000.','الأقواس أولاً، ثم الضرب والقسمة، ثم الجمع والطرح.'],
+['m','أي عبارة صحيحة عند التعامل مع NULL؟',['NULL تساوي صفر دائماً','NULL تعني قيمة غير معروفة أو غير متاحة أو غير منطبقة','NULL تعني سلسلة نصية فارغة في كل الحالات','يمكن مقارنتها باستخدام = بصورة اعتيادية'],1,'NULL ليست صفراً ولا قيمة عادية، ويجب اختبارها باستخدام IS NULL أو IS NOT NULL.'],
+['o','اكتب استعلاماً يعرض الموظفين الذين ليس لديهم قيمة مسجلة في COMMISSION_PCT.','SELECT LAST_NAME, COMMISSION_PCT\nFROM HR.EMPLOYEES\nWHERE COMMISSION_PCT IS NULL;','يستخدم IS NULL لاختبار القيم غير المسجلة.'],
+['m','ما نتيجة الشرط COMMISSION_PCT = 0 عندما تكون قيمة COMMISSION_PCT هي NULL؟',['TRUE','FALSE','UNKNOWN','ERROR دائماً'],2,'المقارنة مع NULL تنتج UNKNOWN، والصف لا يمر عبر WHERE إلا إذا كان الشرط TRUE.'],
+['o','اكتب استعلاماً يعرض الموظفين الذين يعملون في القسم 50 ورواتبهم أكبر من 6,000.','SELECT *\nFROM HR.EMPLOYEES\nWHERE DEPARTMENT_ID = 50\nAND SALARY > 6000;','AND تتطلب تحقق الشرطين معاً.'],
+['m','ما النتيجة المنطقية لاستخدام OR بين شرطين؟',['يجب تحقق الشرطين معاً','يكفي تحقق شرط واحد على الأقل','يجب ألا يتحقق أي شرط','يتم ترتيب النتائج'],1,'OR تقبل الصف إذا تحقق أحد الشرطين أو كلاهما.'],
+['o','اكتب استعلاماً يعرض الموظفين الذين يعملون في الأقسام 10 أو 20 أو 30 باستخدام IN.','SELECT *\nFROM HR.EMPLOYEES\nWHERE DEPARTMENT_ID IN (10, 20, 30);','IN تختصر عدة مقارنات OR على العمود نفسه.'],
+['m','ما وظيفة BETWEEN في SQL؟',['اختيار القيم الواقعة بين حدين، مع شمول الحدين','البحث عن نص يبدأ بحرف','ربط جدولين','حذف القيم الفارغة'],0,'BETWEEN تشمل الحد الأدنى والحد الأعلى.'],
+['o','اكتب استعلاماً يعرض الموظفين الذين رواتبهم بين 5,000 و10,000.','SELECT *\nFROM HR.EMPLOYEES\nWHERE SALARY BETWEEN 5000 AND 10000;','القيمتان 5,000 و10,000 مشمولتان في النطاق.'],
+['m','في LIKE، ماذا يعني الرمز %؟',['حرف واحد فقط','صفر أو أكثر من الأحرف','رقم واحد فقط','قيمة NULL'],1,'% يمثل أي عدد من الأحرف، بما في ذلك عدم وجود أحرف.'],
+['o','تريد البحث عن أسماء الموظفين التي تبدأ بحرف S. ما شرط WHERE المناسب؟','WHERE FIRST_NAME LIKE \'S%\'','S في البداية، و% يسمح بوجود صفر أو أكثر من الأحرف بعدها.'],
+['o','كتب محلل الاستعلام التالي للبحث عن الموظفين الذين لا توجد لديهم عمولة:\nSELECT LAST_NAME\nFROM HR.EMPLOYEES\nWHERE COMMISSION_PCT = NULL;\nحدد الخطأ واكتب التصحيح.','SELECT LAST_NAME\nFROM HR.EMPLOYEES\nWHERE COMMISSION_PCT IS NULL;','لا تستخدم = NULL؛ يجب استخدام IS NULL.'],
+['m','أي عبارة تستخدم لترتيب الرواتب من الأعلى إلى الأقل؟',['ORDER BY SALARY ASC','ORDER BY SALARY DESC','GROUP BY SALARY','WHERE SALARY DESC'],1,'DESC تعني ترتيباً تنازلياً من الأكبر إلى الأصغر.'],
+['o','اكتب استعلاماً يعرض LAST_NAME وSALARY للموظفين في القسم 80 ممن تزيد رواتبهم على 10,000، مع ترتيب الرواتب من الأعلى إلى الأقل.','SELECT LAST_NAME, SALARY\nFROM HR.EMPLOYEES\nWHERE DEPARTMENT_ID = 80\nAND SALARY > 10000\nORDER BY SALARY DESC;','حددنا الأعمدة والجدول والشروط، ثم رتبنا النتائج تنازلياً.'],
+['o','تريد الإدارة تقريراً عن الموظفين الذين لديهم عمولة مسجلة، وتريد عرض أنواع الوظائف دون تكرار، مع ترتيبها أبجدياً. اكتب الاستعلام واشرح سبب استخدام DISTINCT.','SELECT DISTINCT JOB_ID\nFROM HR.EMPLOYEES\nWHERE COMMISSION_PCT IS NOT NULL\nORDER BY JOB_ID ASC;','SELECT تحدد العمود المطلوب.\nDISTINCT تعرض كل وظيفة مرة واحدة.\nWHERE IS NOT NULL تستبعد الموظفين الذين لا توجد لديهم عمولة مسجلة.\nORDER BY ASC يرتب الوظائف تصاعدياً.']
+]}
+];
+function norm(a,c){var k=a[0];return k=="m"?{k:k,q:a[1],o:a[2],a:a[3],e:a[4],c:c}:k=="t"?{k:k,q:a[1],o:["صح (True)","خطأ (False)"],a:a[2]?0:1,e:a[3],c:c}:{k:k,q:a[1],m:a[2],e:a[3],c:c}}
+C.forEach(function(c,i){c.L=c.q.map(function(a){return norm(a,i)})});
+var app=document.getElementById("app"),R,SH=true;
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function on(sel,fn){Array.prototype.forEach.call(app.querySelectorAll(sel),function(b){b.onclick=function(){fn(b)}})}
+
+function home(){
+ var all=[],h='<h1>بنك أسئلة إدارة بيانات الأعمال</h1><p class="mut">ماجستير تحليل بيانات الأعمال · اختر فصلًا أو اختبارًا شاملًا</p><div class="box"><label><input type="checkbox" id="sh"'+(SH?" checked":"")+'> ترتيب عشوائي للأسئلة والخيارات</label></div>';
+ C.forEach(function(c,i){all=all.concat(c.L);h+='<button class="ch" data-i="'+i+'"'+(c.L.length?"":" disabled")+'><div><b>'+c.n+'</b><br>'+c.s+'</div><span>'+(c.L.length?c.L.length+" سؤال":"قريبًا")+'</span></button>'});
+ h+='<button class="ch all" id="all"'+(all.length?"":" disabled")+'><div>اختبار شامل (أسئلة الفصول مخلوطة)</div><span>'+all.length+' سؤال</span></button>';
+ app.innerHTML=h;
+ $("sh").onchange=function(){SH=this.checked};
+ on(".ch[data-i]",function(b){var c=C[+b.dataset.i];start(c.L,c.n+": "+c.s)});
+ if(all.length)$("all").onclick=function(){start(all,"اختبار شامل",1)};
+}
+function $(i){return document.getElementById(i)}
+function start(L,t,f){R={base:L,t:t,f:f,L:SH||f?sh(L.slice()):L.slice(),i:0,sc:0,res:[],pk:null,rev:false,ord:null,txt:""};show()}
+
+function show(){
+ var q=R.L[R.i],n=R.L.length;
+ if(!q)return done();
+ if(!R.ord){R.ord=q.o?q.o.map(function(_,i){return i}):[];if(SH&&q.k=="m")sh(R.ord)}
+ var h='<div class="cnt"><button class="x" id="qt">✕ إنهاء</button><button class="x" id="fg">'+(R.fg?"🚩 معلّمة للمراجعة":"⚑ ما فهمتها؟ علّمها")+'</button><span>سؤال '+(R.i+1)+' من '+n+' · الدرجة '+R.sc+'</span></div><div class="bar"><i style="width:'+(R.i/n*100)+'%"></i></div><p class="qt t">'+esc(q.q)+'</p>';
+ if(q.k=="o"){
+  if(!R.rev)h+='<textarea id="ta" placeholder="اكتب إجابتك هنا">'+esc(R.txt)+'</textarea><button class="btn" id="rv">اعرض الإجابة النموذجية</button>';
+  else h+='<div class="ans"><b>الإجابة النموذجية · Model answer</b><div class="t">'+esc(q.m)+'</div>'+(q.e?'<p class="t">'+esc(q.e)+'</p>':"")+'</div><p>قارن بإجابتك ثم قيّمها:</p><div class="row"><button class="btn g" data-s="1">صحيحة · Correct</button><button class="btn y" data-s="0.5">جزئية · Partial</button><button class="btn r" data-s="0">خاطئة · Wrong</button></div>';
+ }else{
+  R.ord.forEach(function(k,j){
+   var c="opt",d="",m=q.k=="m"?"ABCD".charAt(j):"";
+   if(R.pk!==null){d=" disabled";if(k==q.a){c+=" ok";m="✓"}else if(k==R.pk){c+=" bad";m="✗"}}
+   h+='<button class="'+c+'" data-k="'+k+'"'+d+'><b>'+m+'</b><span class="t">'+esc(q.o[k])+'</span></button>'});
+  if(R.pk!==null){var ok=R.pk==q.a;
+   h+='<div class="fb '+(ok?"ok":"bad")+'">'+(ok?"إجابة صحيحة · Correct":"إجابة خاطئة · Incorrect")+'<p class="t">الإجابة النموذجية · Model answer: '+esc(q.o[q.a])+'</p>'+(q.e?'<p class="t">'+esc(q.e)+'</p>':"")+'</div><button class="btn" id="nx">'+(R.i+1>=n?"عرض النتيجة":"السؤال التالي")+'</button>'}
+ }
+ app.innerHTML=h;
+ $("qt").onclick=function(){if(confirm("تنهي الاختبار؟"))home()};$("fg").onclick=function(){R.fg=!R.fg;var t=$("ta");if(t)R.txt=t.value;show()};
+ on(".opt",function(b){if(R.pk===null){R.pk=+b.dataset.k;show()}});
+ if($("nx"))$("nx").onclick=function(){rec(R.pk==q.a?1:0)};
+ if($("rv"))$("rv").onclick=function(){R.txt=$("ta").value;R.rev=true;show()};
+ on("[data-s]",function(b){rec(+b.dataset.s)});
+ window.scrollTo(0,0);
+}
+function rec(s){R.res.push({q:R.L[R.i],s:s,pk:R.pk,txt:R.txt,fg:R.fg});R.sc+=s;R.i++;R.pk=null;R.rev=false;R.ord=null;R.txt="";R.fg=false;show()}
+
+function done(){
+ var n=R.L.length,p=Math.round(R.sc/n*100),miss=R.res.filter(function(r){return r.s<1||r.fg}),st={};
+ R.res.forEach(function(r){var k=r.q.c,o=st[k]||(st[k]={w:0,h:0,f:0,t:0,s:0});o.t++;o.s+=r.s;if(r.s==0)o.w++;else if(r.s<1)o.h++;if(r.fg)o.f++});
+ var wk=Object.keys(st).sort(function(a,b){return st[a].s/st[a].t-st[b].s/st[b].t})[0],g=st[wk].s==st[wk].t,sm='<div style="text-align:start;margin:14px 0"><div class="fb '+(g?'ok':'wr')+'">'+(g?'ما عندك فصل ضعيف، ممتاز':'الفصل اللي يحتاج تركيز أكثر: '+C[wk].n+' ('+C[wk].s+') — نسبتك فيه '+Math.round(st[wk].s/st[wk].t*100)+'٪')+'</div><b>ملخص المراجعة حسب الفصل</b>';
+ Object.keys(st).forEach(function(k){var o=st[k];sm+='<div class="rv">'+C[k].n+' ('+Math.round(o.s/o.t*100)+'٪): '+(o.w+o.h+o.f==0?'<span style="color:var(--ok)">ممتاز، لا شيء يحتاج مراجعة</span>':'يحتاج مراجعة — خاطئة '+o.w+' · جزئية '+o.h+' · ما فهمتها '+o.f)+'</div>'});
+ sm+='</div>';
+ app.innerHTML='<div class="box c"><p>'+esc(R.t)+'</p><div class="big">'+p+' / 100</div><p>'+R.sc+' من '+n+' · '+(p>=80?"ممتاز":p>=60?"جيد، راجع الأخطاء":"تحتاج مراجعة أكثر")+'</p>'+sm+'<div class="row" style="justify-content:center"><button class="btn" id="re">إعادة الاختبار</button>'+(miss.length?'<button class="btn alt" id="mv">ما يحتاج مراجعة ('+miss.length+')</button>':"")+'<button class="btn alt" id="hm">القائمة الرئيسية</button></div></div>';
+ $("re").onclick=function(){start(R.base,R.t,R.f)};$("hm").onclick=home;
+ if(miss.length)$("mv").onclick=function(){review(miss)};
+}
+function review(miss){
+ var h='<h1>مراجعة الأخطاء</h1><p class="mut">'+miss.length+' سؤال يحتاج مراجعة: خاطئة أو جزئية أو علّمتها</p>';
+ miss.forEach(function(r){var q=r.q;
+  h+='<div class="rv"><p class="mut">'+C[q.c].n+' · '+(r.s==0?"خاطئة":r.s<1?"جزئية":"صحيحة")+(r.fg?" · 🚩 علّمتها للمراجعة":"")+'</p><p class="t"><b>'+esc(q.q)+'</b></p>';
+  if(q.o)h+='<p class="t">إجابتك: '+esc(q.o[r.pk])+'</p><p class="t" style="color:var(--ok)">الصحيحة: '+esc(q.o[q.a])+'</p>';
+  else h+=(r.txt?'<p class="t">إجابتك: '+esc(r.txt)+'</p>':"")+'<p class="t" style="color:var(--ok)">النموذجية: '+esc(q.m)+'</p>';
+  h+=(q.e?'<p class="t mut">'+esc(q.e)+'</p>':"")+'</div>'});
+ h+='<div class="row"><button class="btn" id="rt">اختبرني في هذه الأسئلة</button><button class="btn alt" id="hm">القائمة الرئيسية</button></div>';
+ app.innerHTML=h;
+ $("rt").onclick=function(){start(miss.map(function(r){return r.q}),"الأسئلة التي أخطأت فيها")};$("hm").onclick=home;
+}
+home();
+})();
+</script>
+</body>
+</html>
